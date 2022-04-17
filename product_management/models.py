@@ -24,7 +24,13 @@ class Product(BaseModel):
     def __str__(self):
         return (self.product_name)
 
-    def save(self, *args, **kwargs):
-        if self.quantity:
-            self.in_stock = self.quantity
-        super(Product, self).save(*args, **kwargs)
+    def availibility(self):
+        if self.quantity == 0 or self.quantity is None:
+            return "<span class='text-danger'>Unavailable</span>"
+        else:
+            return "<span class='text-success'>In Stock</span>"
+
+    # def save(self, *args, **kwargs):
+    #     if self.quantity:
+    #         self.in_stock = self.quantity
+    #     super(Product, self).save(*args, **kwargs)

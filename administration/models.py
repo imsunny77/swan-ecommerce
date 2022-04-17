@@ -20,8 +20,8 @@ class RootUser(AbstractUser):
     phone_no_2  = PhoneNumberField('Alternet Phone Number', null=True, blank=True)
     address     = models.ManyToManyField(ShippingAddress)
 
-    def save(self, *args, **kwargs):
-        if self.email:
-            self.username = self.email
-        super(RootUser, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if self.email:
+    #         self.username = self.email
+    #     super(RootUser, self).save(*args, **kwargs)
 
