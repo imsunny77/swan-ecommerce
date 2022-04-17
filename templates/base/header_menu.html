@@ -31,53 +31,16 @@
       </li>
     </ul>
   </li>
-  <li class="nav-item submenu dropdown">
-    <a
-      href="#"
-      class="nav-link dropdown-toggle"
-      data-toggle="dropdown"
-      role="button"
-      aria-haspopup="true"
-      aria-expanded="false"
-      >Blog</a
-    >
-    <ul class="dropdown-menu">
-      <li class="nav-item">
-        <a class="nav-link" href="blog.html">Blog</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="single-blog.html">Blog Details</a>
-      </li>
-    </ul>
+
+  {% if request.user.is_authenticated %}
+  <li class="nav-item">Welcome, 
+    <a class="nav-link" href="">{{request.user.first_name}}</a>
   </li>
-  <li class="nav-item submenu dropdown">
-    <a
-      href="#"
-      class="nav-link dropdown-toggle"
-      data-toggle="dropdown"
-      role="button"
-      aria-haspopup="true"
-      aria-expanded="false"
-      >Pages</a
-    >
-    <ul class="dropdown-menu">
-      <li class="nav-item">
-        <a class="nav-link" href="login.html">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="tracking.html">Tracking</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="elements.html">Elements</a>
-      </li>
-    </ul>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="contact.html">Contact</a>
-  </li>
+  {% else %}
   <li class="nav-item">
     <a class="nav-link" href="{% url 'login' %}">Login</a>
   </li>
+  {% endif %}
 </ul>
 
 <ul class="nav navbar-nav navbar-right">

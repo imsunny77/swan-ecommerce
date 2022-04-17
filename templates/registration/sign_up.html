@@ -1,0 +1,30 @@
+{% extends 'registration/reg_base.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %} 
+{% block title %} Sign Up {% endblock %} 
+{% block content %} <div class="row">
+<div class="col-lg-6">
+<div class="login_box_img">
+<img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="" />
+<div class="hover">
+<h4>Already User?</h4>
+<a class="primary-btn" href="{% url 'login' %}">Login</a >
+</div>
+</div>
+</div>
+<div class="col-lg-6">
+<div class="login_form_inner">
+<h3>Create an Account</h3>
+<form method="POST" action="" > 
+{% csrf_token %} 
+<div class="col-md-12 form-group"> 
+    {% crispy form %} 
+</div>
+<div class="col-md-12 form-group">
+<button type="submit"class="primary-btn"> Sign Up </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+{% endblock %} 

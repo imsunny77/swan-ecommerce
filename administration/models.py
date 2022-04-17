@@ -18,7 +18,7 @@ class RootUser(AbstractUser):
     email       = models.EmailField('Email', null=True)
     phone_no    = PhoneNumberField('Phone Number', null=True)
     phone_no_2  = PhoneNumberField('Alternet Phone Number', null=True, blank=True)
-    address     = models.ManyToManyField(ShippingAddress, null=True)
+    address     = models.ManyToManyField(ShippingAddress)
 
     def save(self, *args, **kwargs):
         if self.email:
