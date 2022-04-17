@@ -40,8 +40,11 @@ INSTALLED_APPS = [
 
     # local apps
     'administration',
+
     # third party apps
     'crispy_forms',
+    'django_countries',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -133,7 +136,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# AUTH_USER_MODEL = 'administration.UserTWFL'
+AUTH_USER_MODEL = 'administration.RootUser'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 MEDIA_URL = '/media/'
