@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     # local apps
     'administration',
-
+    # third party apps
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -130,4 +131,10 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# AUTH_USER_MODEL = 'administration.UserTWFL'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
