@@ -7,11 +7,11 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class ShippingAddress(BaseModel):
     address_1   = models.CharField('Address Line 1', max_length=50, null=True)
-    address_1   = models.CharField('Address Line 2', max_length=50, null=True, blank=True)
+    address_2   = models.CharField('Address Line 2', max_length=50, null=True, blank=True)
     city        = models.CharField('City', max_length=50, null=True)
     state       = models.CharField('State', max_length=50, null=True)
     zipcode     = models.CharField('Zipcode', max_length=50, null=True)
-    country = CountryField('Country', null=True, blank=True)
+    country     = CountryField('Country', null=True, blank=True)
 
 class RootUser(AbstractUser):
     id          = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -20,8 +20,8 @@ class RootUser(AbstractUser):
     phone_no_2  = PhoneNumberField('Alternet Phone Number', null=True, blank=True)
     address     = models.ManyToManyField(ShippingAddress)
 
-    # def save(self, *args, **kwargs):
-    #     if self.email:
-    #         self.username = self.email
-    #     super(RootUser, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if self.email:
+            self.username = self.email
+        super(RootUser, self).save(*args, **kwargs)
 

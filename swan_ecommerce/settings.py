@@ -42,10 +42,12 @@ INSTALLED_APPS = [
     'administration',
     'product_management',
     'order',
+    
     # third party apps
     'crispy_forms',
     'django_countries',
     'phonenumber_field',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
