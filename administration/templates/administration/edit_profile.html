@@ -1,0 +1,51 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Edit Profile {% endblock %}
+{% block containt %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center
+            justify-content-end">
+            <div class="col-first">
+                <h1>Edit Profile</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="/">Home<span class=""></span></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Single Product Area =================-->
+<div class="product_image_area">
+    <div class="container">
+        <div class="row s_product_inner">
+            <div class="col-lg-3">
+            </div>
+
+            <div class="col-lg-6">
+
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="col-md-12 form-group">
+                        {% crispy form %}
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" class="primary-btn"> Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3">
+            </div>
+        </div>
+    </div>
+
+
+
+    {% endblock %}

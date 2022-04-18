@@ -1,0 +1,52 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %} {{object.first_name}} {{object.last_name}} {% endblock %}
+{% block containt %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center
+			justify-content-end">
+			<div class="col-first">
+				<h1>{{object.first_name}} {{object.last_name}}</h1>
+				<nav class="d-flex align-items-center">
+					<a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
+					<a href="{% url 'administration:edit_user' object.id %}">Edit</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Single Product Area =================-->
+<div class="product_image_area">
+	<div class="container">
+		<div class="row s_product_inner">
+
+			<div class="col-lg-6">
+				<div class="s_product_text">
+					<ul class="list">
+						<li><strong>Name : </strong> {{object.first_name}} {{object.last_name}}</li>
+						<li><strong>Phone number : </strong> {{object.phone_no}}</li>
+						<li><strong>Alternet Phone number : </strong> {{object.phone_no}}</li>
+					</ul>
+				</div>
+				<div class="s_product_text">
+					{% for i in object.address.all %}
+					<h2>Address {{forloop.counter}}</h2>
+					<ul class="list">
+						<li><strong>address : </strong> {{i.address_1}} {{object.address_2}}</li>
+						<li><strong>city : </strong> {{object.city}}</li>
+						<li><strong>state : </strong> {{object.state}}</li>
+						<li><strong>zipcode : </strong> {{object.zipcode}}</li>
+						<li><strong>country : </strong> {{object.country.name}}</li>
+					</ul>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

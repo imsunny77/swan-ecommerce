@@ -1,11 +1,12 @@
 $('.add-to-cart').click(function(){
     var product_id = $(this).attr('data-id')
     var quantity = $('.quantity').val()
-    console.log(quantity)
     var product_quantity = 1
     if (quantity){
         product_quantity = quantity
     }
+    console.log(product_quantity)
+
     $.ajax({
         type: "POST",
         url: `/api/add-to-cart/${product_id}/`,
