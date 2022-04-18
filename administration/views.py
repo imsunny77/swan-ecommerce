@@ -26,7 +26,6 @@ def my_profile(request):
     user = RootUser.objects.get(username=request.user.username)
     return render(request,'administration/my_profile.html',{'object':user})
 
-
 def edit_user(request,pk):
     user = RootUser.objects.get(pk=pk)
     form = RootUserForm(request.POST or None, instance = user)
@@ -35,3 +34,23 @@ def edit_user(request,pk):
         return redirect('administration:my_profile')
     return render(request,'administration/edit_profile.html',{'form':form})
 
+def add_address(request,pk):
+    user = RootUser.objects.get(pk=pk)
+    form = ShippingAddressForm(request.POST or None)
+    if form.is_valid():
+        address_obj = form.save(commit=False)
+        address_obj.save()
+
+        user.address.add(address_obj)
+        user.save()
+        return redirect('administration:my_profile')
+    return render(request,'administration/add_address.html',{'form':form})
+
+# def edit_address(request,pk):
+#     address = ShippingAddress.objects.get(pk=pk)
+#     form = ShippingAddressForm(request.POST or None,instance = uaddressser)
+#     if form.is_valid():
+#         address_obj = form.save(commit=False)
+#         address_obj.save()
+#         return redirect('administration:my_profile')
+#     return render(request,'administration/add_address.html',{'form':form})

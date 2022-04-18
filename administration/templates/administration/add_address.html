@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block title %} Edit Profile {% endblock %}
+{% block title %} Add Address {% endblock %}
 {% block containt %}
 
 <!-- Start Banner Area -->
@@ -11,7 +11,7 @@
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center
             justify-content-end">
             <div class="col-first">
-                <h1>Edit Profile</h1>
+                <h1>Add Address</h1>
                 <nav class="d-flex align-items-center">
                     <a href="/">Home<span class=""></span></a>
                 </nav>
@@ -46,4 +46,9 @@
         </div>
     </div>
 </div>
+{% endblock %}
+{% block js %}
+<script>
+    $('#id_country').addClass('form-group')
+</script>
 {% endblock %}

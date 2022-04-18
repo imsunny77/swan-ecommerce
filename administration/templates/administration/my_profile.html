@@ -29,7 +29,7 @@
 				<div class="s_product_text">
 					<ul class="list">
 						<li><strong>Name : </strong> {{object.first_name}} {{object.last_name}}</li>
-						<li><strong>Phone number : </strong> {{object.phone_no}}</li>
+						<li><strong>Phone number : </strong> {{object.address.all}}</li>
 						<li><strong>Alternet Phone number : </strong> {{object.phone_no}}</li>
 					</ul>
 				</div>
@@ -37,16 +37,28 @@
 					{% for i in object.address.all %}
 					<h2>Address {{forloop.counter}}</h2>
 					<ul class="list">
-						<li><strong>address : </strong> {{i.address_1}} {{object.address_2}}</li>
-						<li><strong>city : </strong> {{object.city}}</li>
-						<li><strong>state : </strong> {{object.state}}</li>
-						<li><strong>zipcode : </strong> {{object.zipcode}}</li>
-						<li><strong>country : </strong> {{object.country.name}}</li>
+						<li><strong>address : </strong> {{i.address_1}} {{i.address_2}}</li>
+						<li><strong>city : </strong> {{i.city}}</li>
+						<li><strong>state : </strong> {{i.state}}</li>
+						<li><strong>zipcode : </strong> {{i.zipcode}}</li>
+						<li><strong>country : </strong> {{i.country.name}}</li>
 					</ul>
 					{% endfor %}
 				</div>
 			</div>
 		</div>
+
+		<div class="col-lg-5 offset-lg-1">
+
+			<div class="card_area d-flex align-items-center">
+				<a class="primary-btn" href="{% url 'administration:add_address' object.id %}">Add to Address</a>
+			</div>
+
+
+		</div>
 	</div>
 </div>
+<br>
+<br>
+
 {% endblock %}

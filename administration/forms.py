@@ -65,3 +65,31 @@ class RootUserForm(forms.ModelForm):
                 css_class='form-row'
             ),
         )
+
+class ShippingAddressForm(forms.ModelForm):
+    class Meta:
+        model = ShippingAddress
+        fields = ['address_1', 'address_2','city','state', 'zipcode','country']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Row(
+                Column('address_1', css_class='form-group col-md-6 mb-0'),
+                Column('address_2', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('city', css_class='form-group col-md-6 mb-0'),
+                Column('state', css_class='form-group col-md-6 mb-0'),
+
+                css_class='form-row'
+            ),
+            Row(
+                Column('zipcode', css_class='form-group col-md-6 mb-0'),
+                Column('country', css_class='form-group  col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+        )
