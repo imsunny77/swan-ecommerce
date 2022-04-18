@@ -24,12 +24,7 @@
 				<div class="head">Categories</div>
 				<!-- categories -->
 				<ul class="main-categories">
-					<a href="{{request.path}}">
-						<li class="filter-list">
-							<input class="pixel-radio" type="radio" id="all-product" name="brand">
-							<label for="all-product">All Products <span>({{all_product}})</span></label>
-						</li>
-					</a>
+
 					{% for category in categories %}
 					<a href="/all-products/?category={{category.id}}">
 					<li class="filter-list">

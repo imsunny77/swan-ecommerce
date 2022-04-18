@@ -37,7 +37,7 @@ def filter_product(request):
     context={}
     query =request.GET.get('q')
     print(query)
-    qs = Product.objects(Q(product_name__icontains=query) | 
+    qs = Product.objects.filter(Q(product_name__icontains=query) | 
             Q(product_category__category__icontains=query))
     paginated_filtered_list = Paginator(qs,10)
     page_number = request.GET.get('page')
