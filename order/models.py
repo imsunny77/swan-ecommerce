@@ -15,6 +15,9 @@ class Cart(BaseModel):
     total_price = models.DecimalField(('Total Payable'),max_digits=10, decimal_places=2, null=True)
     payment_status = models.IntegerField("Status", choices=PaymentStatus.choices, default=PaymentStatus.PENDING)
 
+    def __str__(self):
+        return (self.cart_id)
+
     def save(self, *args, **kwargs):
         if not self.cart_id:
             cart_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k = S))    
@@ -28,4 +31,11 @@ class CartItem(BaseModel):
     product_category= models.CharField(max_length=100, null=True)
     price           = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     quantity        = models.IntegerField("Purchased Quantity", null=True)
+    total_price     = models.DecimalField(max_digits=10, decimal_places=2, null=True)
 
+    def save(self, *args, **kwargs):
+        if self.quantity == 1:
+            self.total_price = self.price
+        else:
+            self.total_price = self.price * self.quantity
+        super(CartItem, self).save(*args, **kwargs)
