@@ -67,10 +67,18 @@
 									<!-- <h6 class="l-through">${{product.price}}</h6> -->
 								</div>
 								<div class="prd-bottom">
-									<a href="" class="social-info">
+									{% if request.user.is_authenticated %}
+									<a class="social-info add-to-cart" data-id="{{product.id}}">
+										<span class="ti-bag"></span>
+										<p class="hover-text" >add to bag</p>
+									</a>
+									{% else %}
+									<a href="{% url 'login' %}"class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">add to bag</p>
 									</a>
+									{% endif %}
+									
 									<a href="{% url 'product_management:product_detail' product.pk %}"
 										class="social-info">
 										<span class="lnr lnr-move"></span>

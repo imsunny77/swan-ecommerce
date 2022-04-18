@@ -1,8 +1,6 @@
-alert(csrftoken)
 $('.add-to-cart').click(function(){
     product_id = $(this).attr('data-id')
     $.ajax({
-        
         type: "POST",
         url: `/api/add-to-cart/${product_id}/`,
         data: {
