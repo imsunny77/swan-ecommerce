@@ -5,6 +5,8 @@ $('.add-to-cart').click(function(){
     if (quantity){
         product_quantity = quantity
     }
+    console.log(product_quantity)
+
     $.ajax({
         type: "POST",
         url: `/api/add-to-cart/${product_id}/`,
