@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # local apps
     'administration',
     'product_management',
+    'order',
     # third party apps
     'crispy_forms',
     'django_countries',

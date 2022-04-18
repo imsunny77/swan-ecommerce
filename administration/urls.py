@@ -5,5 +5,4 @@ app_name = 'administration'
 urlpatterns = [
     path('',        views.HomePageView.as_view(), name='home'),
     path('sign-up/',views.add_user, name='add_user'),
-
 ]

@@ -8,6 +8,9 @@ class ProductCategory(BaseModel):
     def __str__(self):
         return (self.category)
 
+    def total_items(self):
+        return self.product_set.all().count()
+
 def image_directory_path(instance, filename):
     return '{0}/{1}'.format(instance.product_category.category,filename)
 

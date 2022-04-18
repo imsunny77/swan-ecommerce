@@ -1,0 +1,11 @@
+{% load administration_extras %}
+
+        {% if page_obj.has_previous %}
+            <a class="prev-arrow" href="{% my_url page_obj.previous_page_number 'page' request.GET.urlencode %}"
+                tabindex="-1"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+        {% endif %}
+            <a class="active">{{ page_obj.number }}</a>
+        {% if page_obj.has_next %}
+            <a href="{% my_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+        {% endif %}
+

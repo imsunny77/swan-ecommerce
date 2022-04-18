@@ -58,6 +58,7 @@
 							<li><a ><span>Availibility</span> : {{object.availibility|safe}}</a></li>
 						</ul>
 						<p>{{object.description}}</p>
+                        {% if not object.quantity == 0 %}
 
 						<div class="product_count">
 							<label for="qty">Quantity:</label>
@@ -71,6 +72,8 @@
 						<div class="card_area d-flex align-items-center">
 							<a class="primary-btn" href="#">Add to Cart</a>
 						</div>
+						{% endif %}
+
 					</div>
 				</div>
 			</div>

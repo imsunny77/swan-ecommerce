@@ -1,0 +1,100 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %} {{object.product_name}} {% endblock %}
+{% block containt %}
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>All Product</h1>
+					<nav class="d-flex align-items-center">
+						<a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="{{request.path}}">Shop</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-3 col-lg-4 col-md-5">
+				<div class="sidebar-categories">
+					<div class="head">Categories</div>
+                    <!-- categories -->
+                    <ul class="main-categories">
+                        {% for category in categories %}
+                       <li class="filter-list">
+                           <input class="pixel-radio" type="radio" id="{{category.id}}" name="brand">
+                           <label for="samsung">{{category.category}} <span>({{category.total_items}})</span></label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+				</div>
+
+			</div>
+			<div class="col-xl-9 col-lg-8 col-md-7">
+				<!-- Start Filter Bar -->
+				<div class="filter-bar d-flex flex-wrap align-items-center">
+					<div class="sorting">
+
+					</div>
+					<div class="sorting mr-auto">
+
+					</div>
+					<div class="pagination">
+                        {% include 'base/pagination.html'%}
+						
+					</div>
+				</div>
+
+				<section class="lattest-product-area pb-40 category-list">
+					<div class="row">
+						{% for product in page_obj %}
+						<div class="col-lg-4 col-md-6">
+							<div class="single-product">
+                                {% if product.thumbnail_image %}
+								<img class="img-fluid" src="{{product.thumbnail_image.url}}" alt="">
+                                {% endif %}
+
+								<div class="product-details">
+									<h6>{{product.product_name}}</h6>
+									<div class="price">
+										<h6>${{product.price}}</h6>
+										<!-- <h6 class="l-through">${{product.price}}</h6> -->
+									</div>
+									<div class="prd-bottom">
+
+										<a href="" class="social-info">
+											<span class="ti-bag"></span>
+											<p class="hover-text">add to bag</p>
+										</a>
+
+										<a href="{% url 'product_management:product_detail' product.pk %}" class="social-info">
+											<span class="lnr lnr-move"></span>
+											<p class="hover-text">view more</p>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+                        {% endfor %}
+					</div>
+				</section>
+				<!-- End Best Seller -->
+				<!-- Start Filter Bar -->
+				<div class="filter-bar d-flex flex-wrap align-items-center">
+					<div class="sorting mr-auto">
+
+					</div>
+					<div class="pagination">
+                        {% include 'base/pagination.html'%}
+					</div>
+				</div>
+				<!-- End Filter Bar -->
+			</div>
+		</div>
+	</div>
+    {% endblock %}
