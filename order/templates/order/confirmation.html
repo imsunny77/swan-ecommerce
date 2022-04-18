@@ -34,13 +34,15 @@
 						</ul>
 					</div>
 				</div>
+				
+				{% if address_status %}
 				<div class="col-lg-4">
 					<div class="details_item">
 						<h4>Billing Address</h4>
 						<ul class="list">
 							<li><a ><span>Street</span> : {{address.address_1}} {{address.address_2}}</a></li>
 							<li><a ><span>City</span> : {{address.city}}</a></li>
-							<li><a ><span>Country</span> :  {{address.country}}</a></li>
+							<li><a ><span>Country</span> :  {{address.country.name}}</a></li>
 							<li><a ><span>Postcode </span> :  {{address.zipcode}}</a></li>
 						</ul>
 					</div>
@@ -51,11 +53,13 @@
 						<ul class="list">
 							<li><a ><span>Street</span> : {{address.address_1}} {{address.address_2}}</a></li>
 							<li><a ><span>City</span> : {{address.city}}</a></li>
-							<li><a ><span>Country</span> :  {{address.country}}</a></li>
+							<li><a ><span>Country</span> :  {{address.country.name}}</a></li>
 							<li><a ><span>Postcode </span> :  {{address.zipcode}}</a></li>
 						</ul>
 					</div>
 				</div>
+				{% endif %}
+
 			</div>
 			<div class="order_details_table">
 				<h2>Order Details</h2>

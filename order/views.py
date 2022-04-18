@@ -2,6 +2,7 @@ import re
 from django.shortcuts import render
 from order.models import *
 from .utils import mail_order_detail
+
 def cart_list(request):
     if 'current_cart' in request.session.keys():
         current_cart = request.session['current_cart']
@@ -27,12 +28,16 @@ def confirmation(request,pk):
     cart_obj = Cart.objects.get(pk=pk)
     cart_items = CartItem.objects.filter(cart_id = cart_obj)
     user = RootUser.objects.get(username = request.user.username)
-    address = user.address.last()
+    try:
+        address = user.address.last()
+        address_status = True
+    except:
+        address_status = False
     total_payable = 0
     for i in cart_items:
         total_payable = total_payable + i.total_price
         total_payable = total_payable
-    cart_obj.total_price =total_payable 
+    cart_obj.total_price=total_payable 
     cart_obj.save()
     mail_order_detail(user.email)
     context = { 
@@ -40,6 +45,9 @@ def confirmation(request,pk):
         'cart_obj':cart_obj,
         'user':user,
         'address':address,
-        'total':total_payable
+        'total':total_payable,
+        'address_status':address_status,
+
+        
     }
     return render(request,'order/confirmation.html',context)

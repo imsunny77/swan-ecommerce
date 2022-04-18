@@ -4,6 +4,7 @@ from django.shortcuts import render
 from product_management.models import *
 from django.views.generic import * 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 
 # Create your views here.
 def product_detail(request, pk):
@@ -31,3 +32,17 @@ class ProductList(ListView):
         context['current_category'] = category
         context['all_product'] = Product.objects.all().count()
         return context 
+
+def filter_product(request):
+    context={}
+    query =request.GET.get('q')
+    print(query)
+    qs = Product.objects(Q(product_name__icontains=query) | 
+            Q(product_category__category__icontains=query))
+    paginated_filtered_list = Paginator(qs,10)
+    page_number = request.GET.get('page')
+    context['page_obj'] = paginated_filtered_list.get_page(page_number)
+    context['categories'] = ProductCategory.objects.all()
+    context['current_category'] = query
+    context['all_product'] = Product.objects.all().count()
+    return render(request,'product_management/product_list.html',context)
