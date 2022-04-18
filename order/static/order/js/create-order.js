@@ -1,10 +1,16 @@
 $('.add-to-cart').click(function(){
-    product_id = $(this).attr('data-id')
+    var product_id = $(this).attr('data-id')
+    var quantity = $('.quantity').val()
+    console.log(quantity)
+    var product_quantity = 1
+    if (quantity){
+        product_quantity = quantity
+    }
     $.ajax({
         type: "POST",
         url: `/api/add-to-cart/${product_id}/`,
         data: {
-            'quantity': 1,
+            'quantity': product_quantity,
             csrfmiddlewaretoken: csrftoken,
         },
         success: function () {

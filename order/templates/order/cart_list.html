@@ -50,7 +50,10 @@
                                     <h5>{{i.total_price}}</h5>
                                 </td>
                             </tr>
-                            {% endfor %}
+                            {% empty %}
+                            <tr>
+                                <td>Your Cart is Empty</td>
+                            </tr>                          {% endfor %}
 
 
                             <tr>
@@ -81,7 +84,10 @@
                                 <td>
                                     <div class="checkout_btn_inner d-flex align-items-center">
                                         <a class="gray_btn" href="{% url 'product_management:product_list' %}">Continue Shopping</a>
+                                        {% if cart_items %}
                                         <a class="primary-btn" href="{% url 'order:confirmation' cart_obj.id %}">Proceed to checkout</a>
+                                        {% endif %}
+
                                     </div>
                                 </td>
                             </tr>
