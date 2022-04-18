@@ -39,9 +39,10 @@
 
     </li>
 </ul>
+{% if request.user.is_authenticated %}
 <ul class="nav navbar-nav navbar-right">
     <li class="nav-item">
-        <a href="#" class="cart">
+        <a href="{% url 'order:cart_list' %}" class="cart">
             <span class="ti-bag">
             </span>
         </a>
@@ -53,3 +54,4 @@
         </button>
     </li>
 </ul>
+{% endif %}

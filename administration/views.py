@@ -3,6 +3,7 @@ from django.views.generic.base import TemplateView
 from administration.forms import *
 from django.contrib.auth.decorators import login_required
 from product_management.models import *
+from order.models import *
 
 class HomePageView(TemplateView):
     template_name = "administration/home.html"

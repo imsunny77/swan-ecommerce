@@ -5,7 +5,7 @@ admin.site.register(Cart)
 
 
 class CartItemAdmin(admin.ModelAdmin):
-    fields = ['cart_id','product','product_name','product_category','price', 'quantity']
-    list_display = ['cart_id','product','product_name','product_category','price', 'quantity']
+    fields = ['cart_id','product','product_name','product_category','price', 'quantity','total_price']
+    list_display = ['cart_id','product','product_name','product_category','price', 'quantity','total_price']
 
 admin.site.register(CartItem,CartItemAdmin)

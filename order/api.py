@@ -15,15 +15,16 @@ class AddToCart(APIView):
             # cart_obj.save()
         current_cart = request.session['current_cart']
         quantity = request.POST['quantity']
+        product_id = get_object_or_404(Product,id = kwargs['product_id'])
         print(current_cart,quantity,product_id)
 
-        product_id = get_object_or_404(Product,id = kwargs['product_id'])
         item_obj, created= CartItem.objects.update_or_create(product=product_id)
         item_obj.cart_id = cart_obj
         item_obj.product_name = product_id.product_name
         item_obj.product_category = product_id.product_category.category
         item_obj.price = product_id.price
         item_obj.quantity = quantity
+        item_obj.total_price = int(product_id.price) * int(quantity)
         item_obj.save()
 
         return JsonResponse({"updated_cart": 'updated_cart'})

@@ -1,0 +1,132 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %} Cart {% endblock %}
+{% block containt %} 
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Confirmation</h1>
+					<nav class="d-flex align-items-center">
+						<a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="{{request.path}}">Confirmation</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<!--================Order Details Area =================-->
+	<section class="order_details section_gap">
+		<div class="container">
+			<h3 class="title_confirmation">Thank you. Your order has been received.</h3>
+			<div class="row order_d_inner">
+				<div class="col-lg-4">
+					<div class="details_item">
+						<h4>Order Info</h4>
+						<ul class="list">
+							<li><a ><span>Order number</span> : {{cart_obj.cart_id}}</a></li>
+							<li><a ><span>Date</span> : {{cart_obj.created|date:"d/m/Y"}}</a></li>
+							<li><a ><span>Total</span> : USD{{cart_obj.total_price}}</a></li>
+							<li><a ><span>Payment method</span> : Check payments</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="details_item">
+						<h4>Billing Address</h4>
+						<ul class="list">
+							<li><a ><span>Street</span> : {{address.address_1}} {{address.address_2}}</a></li>
+							<li><a ><span>City</span> : {{address.city}}</a></li>
+							<li><a ><span>Country</span> :  {{address.country}}</a></li>
+							<li><a ><span>Postcode </span> :  {{address.zipcode}}</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="details_item">
+						<h4>Shipping Address</h4>
+						<ul class="list">
+							<li><a ><span>Street</span> : {{address.address_1}} {{address.address_2}}</a></li>
+							<li><a ><span>City</span> : {{address.city}}</a></li>
+							<li><a ><span>Country</span> :  {{address.country}}</a></li>
+							<li><a ><span>Postcode </span> :  {{address.zipcode}}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="order_details_table">
+				<h2>Order Details</h2>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Product</th>
+								<th scope="col">Quantity</th>
+								<th scope="col">Total</th>
+							</tr>
+						</thead>
+						<tbody>
+                            {% for i in cart_items %}
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <p>{{i.product_name}}</p>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <h5>{{i.quantity}}</h5>
+                                </td>
+                                <td>
+                                    <h5>{{i.total_price}}</h5>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+								<td>
+									<h4>total</h4>
+								</td>
+								<td>
+									<h5></h5>
+								</td>
+								<td>
+									<p>${{total}}</p>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h4>Tax</h4>
+								</td>
+								<td>
+									<h5></h5>
+								</td>
+								<td>
+									<p>${{cart_obj.get_tax}}</p>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h4>Total Payable</h4>
+								</td>
+								<td>
+									<h5></h5>
+								</td>
+								<td>
+									<p>${{cart_obj.total_payable}}</p>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Order Details Area =================-->
+
+{% endblock %}
+    <!--================End Cart Area =================-->
