@@ -44,7 +44,7 @@ class SignUpForm(UserCreationForm):
 class RootUserForm(forms.ModelForm):
     class Meta:
         model = RootUser
-        fields = ['email', 'phone_no','phone_no_2','first_name', 'last_name']
+        fields = ['email', 'phone_no','phone_no_2','first_name', 'last_name',]
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -69,7 +69,7 @@ class RootUserForm(forms.ModelForm):
 class ShippingAddressForm(forms.ModelForm):
     class Meta:
         model = ShippingAddress
-        fields = ['address_1', 'address_2','city','state', 'zipcode','country']
+        fields = ['address_1', 'address_2','city','state', 'zipcode','country','is_billing','is_shipping']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -90,6 +90,14 @@ class ShippingAddressForm(forms.ModelForm):
             Row(
                 Column('zipcode', css_class='form-group col-md-6 mb-0'),
                 Column('country', css_class='form-group  col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('is_billing', css_class='form-group col-md-12 mb-0'),
+                css_class='form-row'
+            ),            
+            Row(
+                Column('is_shipping', css_class='form-group col-md-12 mb-0'),
                 css_class='form-row'
             ),
         )

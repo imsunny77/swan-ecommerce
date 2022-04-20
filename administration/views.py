@@ -40,17 +40,42 @@ def add_address(request,pk):
     if form.is_valid():
         address_obj = form.save(commit=False)
         address_obj.save()
-
         user.address.add(address_obj)
         user.save()
+        billing_address = request.POST.get('is_billing')
+        shipping_address = request.POST.get('is_shipping')
+        print(billing_address,shipping_address)
+        if billing_address:
+            for i in user.address.all().exclude(id=address_obj.id):
+                i.is_billing = False
+                i.save()
+        
+        if shipping_address:
+            for i in user.address.all().exclude(id=address_obj.id):
+                i.is_shipping = False
+                i.save()
         return redirect('administration:my_profile')
     return render(request,'administration/add_address.html',{'form':form})
 
-# def edit_address(request,pk):
-#     address = ShippingAddress.objects.get(pk=pk)
-#     form = ShippingAddressForm(request.POST or None,instance = uaddressser)
-#     if form.is_valid():
-#         address_obj = form.save(commit=False)
-#         address_obj.save()
-#         return redirect('administration:my_profile')
-#     return render(request,'administration/add_address.html',{'form':form})
+def edit_address(request,pk):
+    address = ShippingAddress.objects.get(pk=pk)
+    form = ShippingAddressForm(request.POST or None,instance = address)
+    user = RootUser.objects.get(pk=request.user.pk)
+    if form.is_valid():
+        address_obj = form.save(commit=False)
+        address_obj.save()
+        billing_address = request.POST.get('is_billing')
+        shipping_address = request.POST.get('is_shipping')
+        print(billing_address,shipping_address)
+        if billing_address:
+            for i in user.address.all().exclude(id=address_obj.id):
+                i.is_billing = False
+                i.save()
+        
+        if shipping_address:
+            for i in user.address.all().exclude(id=address_obj.id):
+                i.is_shipping = False
+                i.save()
+        
+        return redirect('administration:my_profile')
+    return render(request,'administration/add_address.html',{'form':form})

@@ -13,7 +13,21 @@ class ShippingAddress(BaseModel):
     state       = models.CharField('State', max_length=50, null=True)
     zipcode     = models.CharField('Zipcode', max_length=50, null=True)
     country     = CountryField('Country', null=True, blank=True)
-    
+    is_billing  = models.BooleanField('Do you want to set as default billing address?', default=False)
+    is_shipping = models.BooleanField('Do you want to set as default shipping address?', default=False)
+
+    def billing(self):
+        if self.is_billing:
+            return "default Billing Address"
+        else:
+            return '-'
+
+    def shipping(self):
+        if self.is_shipping:
+            return "default Shipping Address"
+        else:
+            return '-'
+
 class RootUser(AbstractUser):
     id          = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email       = models.EmailField('Email', null=True)

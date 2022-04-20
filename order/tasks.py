@@ -5,6 +5,6 @@ from .utils import mail_order_detail
 from datetime import datetime, timedelta
 
 @task(name="task_mail_order_detail")
-def task_mail_order_detail(mail_to, receipt, branch_email):
-    mail_order_detail(mail_to, receipt, branch_email)
-    return 'Order detail has been sent successfully to the mail %s' % (mail_to,)
+def task_mail_order_detail(email,cart_id,user):
+    mail_order_detail(email,cart_id,user)
+    return 'Order detail has been sent successfully to the mail %s' % (email,)

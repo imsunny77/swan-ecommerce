@@ -11,7 +11,6 @@ def cart_list(request):
         cart_obj = Cart.objects.create()
         request.session['current_cart'] = cart_obj.cart_id
         current_cart = request.session['current_cart']
-
     cart_items = CartItem.objects.filter(cart_id = cart_obj)
     total_payable = 0
     for i in cart_items:
@@ -29,25 +28,27 @@ def confirmation(request,pk):
     cart_items = CartItem.objects.filter(cart_id = cart_obj)
     user = RootUser.objects.get(username = request.user.username)
     try:
-        address = user.address.last()
-        address_status = True
+        billing_address = user.address.get(is_billing=True)
+        shipping_address = user.address.get(is_shipping=True)
+
     except:
-        address_status = False
+        billing_address = user.address.last()
+        shipping_address = user.address.last()
+
     total_payable = 0
     for i in cart_items:
         total_payable = total_payable + i.total_price
         total_payable = total_payable
     cart_obj.total_price=total_payable 
     cart_obj.save()
-    mail_order_detail(user.email)
+    mail_order_detail(user.email,cart_obj.id,user,billing_address.id,shipping_address.id,total_payable)
+    # task_mail_order_detail.delay
     context = { 
         'cart_items':cart_items,
         'cart_obj':cart_obj,
         'user':user,
-        'address':address,
+        'billing_address':billing_address,
+        'shipping_address':shipping_address,
         'total':total_payable,
-        'address_status':address_status,
-
-        
     }
     return render(request,'order/confirmation.html',context)

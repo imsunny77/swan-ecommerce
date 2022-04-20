@@ -29,19 +29,31 @@
 				<div class="s_product_text">
 					<ul class="list">
 						<li><strong>Name : </strong> {{object.first_name}} {{object.last_name}}</li>
-						<li><strong>Phone number : </strong> {{object.address.all}}</li>
-						<li><strong>Alternet Phone number : </strong> {{object.phone_no}}</li>
+						<li><strong>Phone number : </strong> {{object.phone_no}}</li>
+						<li><strong>Alternet Phone number : </strong>
+							{{object.phone_no_2|default_if_none:'not Available'}}</li>
 					</ul>
 				</div>
 				<div class="s_product_text">
 					{% for i in object.address.all %}
-					<h2>Address {{forloop.counter}}</h2>
+					<div class="row">
+
+						<div class="col-6">
+							<h2>Address {{forloop.counter}} </h2>
+						</div>
+						<div class="col-6">
+							<a href="{% url 'administration:edit_address' i.pk %}">Edit</a>
+						</div>
+					</div>
 					<ul class="list">
 						<li><strong>address : </strong> {{i.address_1}} {{i.address_2}}</li>
 						<li><strong>city : </strong> {{i.city}}</li>
 						<li><strong>state : </strong> {{i.state}}</li>
 						<li><strong>zipcode : </strong> {{i.zipcode}}</li>
 						<li><strong>country : </strong> {{i.country.name}}</li>
+						<li><strong>Billing Address : </strong> {{i.billing}}</li>
+						<li><strong>Shipping Address : </strong> {{i.shipping}}</li>
+
 					</ul>
 					{% endfor %}
 				</div>
@@ -51,7 +63,8 @@
 		<div class="col-lg-5 offset-lg-1">
 
 			<div class="card_area d-flex align-items-center">
-				<a class="primary-btn" href="{% url 'administration:add_address' object.id %}">Add to Address</a>
+				<a class="primary-btn" href="{% url 'administration:add_address' object.id %}">
+					Add to Address</a>
 			</div>
 
 
